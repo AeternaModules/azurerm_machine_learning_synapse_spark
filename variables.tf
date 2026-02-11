@@ -21,7 +21,7 @@ EOT
     name                          = string
     synapse_spark_pool_id         = string
     description                   = optional(string)
-    local_auth_enabled            = optional(bool, true)
+    local_auth_enabled            = optional(bool) # Default: true
     tags                          = optional(map(string))
     identity = optional(object({
       identity_ids = optional(set(string))
