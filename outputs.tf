@@ -1,3 +1,7 @@
+output "machine_learning_synapse_sparks_id" {
+  description = "Map of id values across all machine_learning_synapse_sparks, keyed the same as var.machine_learning_synapse_sparks"
+  value       = { for k, v in azurerm_machine_learning_synapse_spark.machine_learning_synapse_sparks : k => v.id }
+}
 output "machine_learning_synapse_sparks_description" {
   description = "Map of description values across all machine_learning_synapse_sparks, keyed the same as var.machine_learning_synapse_sparks"
   value       = { for k, v in azurerm_machine_learning_synapse_spark.machine_learning_synapse_sparks : k => v.description }
