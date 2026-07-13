@@ -21,25 +21,20 @@ EOT
     name                          = string
     synapse_spark_pool_id         = string
     description                   = optional(string)
-    local_auth_enabled            = optional(bool) # Default: true
+    local_auth_enabled            = optional(bool)
     tags                          = optional(map(string))
     identity = optional(object({
       identity_ids = optional(set(string))
       type         = string
     }))
   }))
-  validation {
-    condition = alltrue([
-      for k, v in var.machine_learning_synapse_sparks : (
-        can(regex("^[a-zA-Z][a-zA-Z0-9-]{2,16}$", v.name))
-      )
-    ])
-    error_message = "It can include letters, digits and dashes. It must start with a letter, end with a letter or digit, and be between 2 and 16 characters in length."
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_machine_learning_synapse_spark's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
   # Review, translate into a real validation{} block above, and delete once confirmed.
+  # path: name
+  #   condition: can(regex("^[a-zA-Z][a-zA-Z0-9-]{2,16}$", value))
+  #   message:   It can include letters, digits and dashes. It must start with a letter, end with a letter or digit, and be between 2 and 16 characters in length.
   # path: machine_learning_workspace_id
   #   source:    [from workspaces.ValidateWorkspaceID] !ok
   # path: machine_learning_workspace_id
