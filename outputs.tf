@@ -8,7 +8,7 @@ output "machine_learning_synapse_sparks_description" {
 }
 output "machine_learning_synapse_sparks_identity" {
   description = "Map of identity values across all machine_learning_synapse_sparks, keyed the same as var.machine_learning_synapse_sparks"
-  value       = { for k, v in azurerm_machine_learning_synapse_spark.machine_learning_synapse_sparks : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_machine_learning_synapse_spark.machine_learning_synapse_sparks : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "machine_learning_synapse_sparks_local_auth_enabled" {
   description = "Map of local_auth_enabled values across all machine_learning_synapse_sparks, keyed the same as var.machine_learning_synapse_sparks"
